@@ -1,0 +1,3 @@
+# Dependencies common to all environments
+Django==4.0.3
+

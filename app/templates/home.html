@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Geocaching Project{% endblock %}
+{% block content %}
+<header class="masthead">
+    <div class="container">
+        <div class="masthead-subheading">PaaS Project</div>
+        <div class="masthead-heading text-uppercase">Geocaching</div>
+        <a id="send-message-btn" class="btn btn-primary btn-xl text-uppercase" href="/login">Start Playing</a>
+    </div>
+</header>
+<!-- Services-->
+<section class="page-section" id="services">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Services</h2>
+            <h3 class="section-subheading text-muted">Instant Messages</h3>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fas fa-database fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="my-3">Online Database</h4>
+                <p class="text-muted">The service provided by our program allows to send and receive messages stored in
+                    an online database. Each user must create an account and to log in it to use to the service.</p>
+            </div>
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fas fa-marker fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="my-3">Intuitive Design</h4>
+                <p class="text-muted">The graphics is simple and intuitive such that even user without any technical
+                    knowledge can use the service. </p>
+            </div>
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="my-3">Security requirements</h4>
+                <p class="text-muted">The privacy of messages is preserved thanks to a not elementary encryption system
+                    used to store them.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Portfolio Grid-->
+<section class="page-section bg-light" id="portfolio">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Technologies</h2>
+            <h3 class="section-subheading text-muted">Our project has been created with the next technologies</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <!-- Portfolio item 1-->
+                <div class="portfolio-item">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content"></div>
+                    </div>
+                    <img class="img-fluid" src="{% static 'assets/aws-s3.png' %}" alt="S3" width="400" height="280" >
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading"> Amazon S3</div>To store and protect data online
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <!-- Portfolio item 2-->
+                <div class="portfolio-item">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content"></div>
+                    </div>
+                    <img class="img-fluid" src="{% static 'assets/aws-rds.png' %}" alt="RDS" width="400" height="280" >
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading"> Amazon RDS </div> To set up, operate, and scale
+                        databases in the cloud
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <!-- Portfolio item 3-->
+                <div class="portfolio-item">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content"></div>
+                    </div>
+                    <img class="img-fluid" src="{% static 'assets/aws-ec2.png' %}" alt="EC2" width="400" height="280" >
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">Amazon EC2</div> To set and run the instance of the
+                        machine on which the system works on
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4 ">
+                <!-- Portfolio item 4-->
+                <div class="portfolio-item">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content"></div>
+                    </div>
+                    <img class="img-fluid" src="{% static 'assets/kms.png' %}" alt="KMS" width="400" height="280" >
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">Amazon KMS </div> To create and control the keys used for
+                        cryptographic operations
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
+                <!-- Portfolio item 5-->
+                <div class="portfolio-item">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content"></div>
+                    </div>
+                    <img class="img-fluid" src="{% static 'assets/aws-codestar.png' %}" alt="Codestar" width="400"
+                        height="280" >
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading"> Amazon Codestar </div> To develop, build, and deploy
+                        applications on AWS working in team safely
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About-->
+<section class="page-section" id="about">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">How the web works?</h2>
+            <h3 class="section-subheading text-muted">Our web page operations chain:</h3>
+        </div>
+        <ul class="timeline">
+            <li>
+                <div class="timeline-image"><img class="img" src="{% static 'assets/new_user.png' %}" alt="USER_ICON"
+                        width="120" height="120" ></div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>Create a user</h4>
+                    </div>
+                    <div class="timeline-body">Two types of users could be created: <a href="/register"> <b> <u>Normal
+                                    and Super user </u> </b> </a>
+                        <p class="text-muted">Each new user must compile a form including its first and last name, a
+                            username needed for the log-in and a valid password of at least 5 characters.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-inverted">
+                <div class="timeline-image"><img class="img-fluid" src="{% static 'assets/message.png' %}"
+                        alt="MESSAGE_ICON" width="120" height="120" ></div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>Send a message</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p class="text-muted">Each user must authenticate with the username and passwords previously
+                            created and only then it could <a href="/send">send messages</a> to other users.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="timeline-image"><img class="img-fluid" src="{% static 'assets/lock.png' %}" alt="LOCK_ICON"
+                        width="95" height="95" ></div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>Encrypt the message</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p class="text-muted"> Each message is store in the online database directly encrypted with a
+                            key dependent from some information of the receiving user.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-inverted">
+                <div class="timeline-image"><img class="img-fluid" src="{% static 'assets/unlock.png' %}"
+                        alt="UNLOCK_ICON" width="120" height="120" ></div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>Decrypt the message</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p class="text-muted"></p>
+                    </div>When a user want to visualize the inbox content, it just needs to log-in and it already has
+                    the key to decrypt all its incoming messages.
+                </div>
+            </li>
+            <li>
+                <div class="timeline-image"><img class="img-fluid" src="{% static 'assets/open.png' %}" alt="MAIL_ICON"
+                        width="120" height="120" ></div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>Inbox sight</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p class="text-muted"></p>
+                    </div>In the end each authenticate user is able to see its inbox folder.
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- Team-->
+<section class="page-section bg-light" id="team">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+            <h3 class="section-subheading text-muted">The project has been carried out by this team:</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle" src="{% static 'assets/patxi.jpg' %}" alt="..." >
+                    <h4>Patxi Juaristi Pagegi</h4>
+                    <p class="text-muted">Student</p>
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/patxi-juaristi-pagegi/"
+                        aria-label="Patxi LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle" src="{% static 'assets/antonio.jpg' %}" alt="..." >
+                    <h4>Antonio Lara Gutiérrez</h4>
+                    <p class="text-muted">Student</p>
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/antonio-lara-gutierrez/"
+                        aria-label="Antonio LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle" src="{% static 'assets/laura.png' %}" alt="..." >
+                    <h4>Laura Fiorella</h4>
+                    <p class="text-muted">Student</p>
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/laura-fiorella"
+                        aria-label="Laura LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle" src="{% static 'assets/antonio_jose.jpeg' %}" alt="..." >
+                    <h4>Antonio José Martín Vargas</h4>
+                    <p class="text-muted">Student</p>
+                    <a class="btn btn-dark btn-social mx-2"
+                        href="https://www.linkedin.com/in/antonio-jos%C3%A9-martin-vargas/"
+                        aria-label="Antonio Jose LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
