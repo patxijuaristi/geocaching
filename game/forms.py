@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cache, Game
+from .models import Cache, FoundCacheImage, Game
 
 class GameCreationForm(forms.ModelForm):
 
@@ -35,4 +35,14 @@ class CacheCreationForm(forms.ModelForm):
             'latitude',
             'longitude',
             'order',
+        ]
+
+class FoundCacheCreationForm(forms.ModelForm):
+
+    cache_picture = forms.FileField(widget=forms.FileInput(attrs={'accept': 'image/*', 'class': 'form-control'}))
+
+    class Meta:
+        model = FoundCacheImage
+        fields = [
+            'cache_picture'
         ]

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from game.views import games_view, my_games_view, play_game_view, edit_game_view, delete_game, reset_game, create_game_view, my_game_detail_view, create_cache_view
+from game.views import games_view, my_games_view, play_game_view, edit_game_view, delete_game, reset_game, create_game_view, my_game_detail_view, create_cache_view, found_cache
 
 from home.views import home_view
 from users.views import login_view, signup_view, logout_view
@@ -17,6 +17,7 @@ urlpatterns = [
     
     path('games', games_view, name='games'),
     path('games/<game_id>', play_game_view, name='play-game'),
+    path('games/<game_id>/found-cache', found_cache, name='found-cache'),
 
     path('my-games', my_games_view, name='my-games'),
     path('my-games/create', create_game_view, name='create-game'),

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Cache, Game, GameResult
+from .models import Cache, FoundCacheImage, Game, GameResult
 
 class CustomGame(admin.ModelAdmin):
     list_display = ("name", "latitude", "longitude", "radius", "creator", "active")
@@ -15,3 +15,4 @@ class CustomGameResult(admin.ModelAdmin):
 admin.site.register(Game, CustomGame)
 admin.site.register(Cache, CustomCache)
 admin.site.register(GameResult, CustomGameResult)
+admin.site.register(FoundCacheImage)

@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from app.decorators import user_game_data
-from .forms import GameCreationForm, CacheCreationForm
-
+from .forms import FoundCacheCreationForm, GameCreationForm, CacheCreationForm
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from .models import Cache, Game, GameResult
 
 @login_required
@@ -28,11 +28,44 @@ def my_games_view(request):
 @login_required
 def play_game_view(request, game_id):
     game = get_object_or_404(Game, id=game_id)
+    caches = game.game_cache.all()
+
+    try:
+        GameResult.objects.filter(game=game).get(player=request.user)
+    except ObjectDoesNotExist:
+        GameResult.objects.create(game=game, player=request.user)
+        pass
+
+    found_form = FoundCacheCreationForm(request.POST or None)
     
     context = {
         'game': game,
+        'caches': caches,
+        'found_form': found_form,
+        'game_id': game_id
     }
     return render(request, "game/play_game.html", context)
+
+@login_required
+def found_cache(request, game_id):
+    form = FoundCacheCreationForm(request.POST, request.FILES or None)
+    if form.is_valid():
+        f_img = form.save(commit=False)
+        game = get_object_or_404(Game, id=game_id)
+        game_result = GameResult.objects.filter(game=game).get(player=request.user)
+        game_result.found_caches = game_result.found_caches + 1
+        game_result.save()
+
+        f_img.game_result = game_result
+        f_img.save()
+
+        total_caches = game.game_cache.all().count()
+        if total_caches == game_result.found_caches:
+            game.active = False
+            game.winner = request.user
+            game.save()
+        messages.success(request, 'Cache finding added correctly')
+    return redirect('/games/' + str(game_id))
 
 @login_required
 @user_game_data

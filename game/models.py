@@ -57,3 +57,8 @@ class GameResult(models.Model):
 
     def __str__(self):
         return self.player.email + ' found ' + str(self.found_caches) + ' caches in game: ' + self.game.name
+
+class FoundCacheImage(models.Model):
+    
+    cache_picture = models.ImageField(default='test.png',  upload_to='found-cache/')
+    game_result = models.ForeignKey(GameResult, on_delete=models.CASCADE, related_name='found_cache')
