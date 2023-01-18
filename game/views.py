@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from app.decorators import user_game_data
+from .forms import GameCreationForm
 
-from game.models import Cache, Game, GameResult
+from .models import Cache, Game, GameResult
 
 @login_required
 def games_view(request):
@@ -32,6 +33,22 @@ def play_game_view(request, game_id):
         'games': games,
     }
     return render(request, "game/play_game.html", context)
+
+@login_required
+def create_game_view(request):
+    if request.method =='GET':
+        form = GameCreationForm(request.POST or None)
+        context = {
+            'form': form
+        }
+        return render(request, "game/create_game.html", context)
+    else:
+        form = GameCreationForm(request.POST, request.FILES or None)
+        if form.is_valid():
+            game = form.save(commit=False)
+            game.creator = request.user
+            game.save()
+        return redirect('/my-games')
 
 @login_required
 @user_game_data
