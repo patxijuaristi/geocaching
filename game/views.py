@@ -6,17 +6,37 @@ from game.models import Cache, Game
 
 @login_required
 def games_view(request):
-    game = get_object_or_404(Game, name='Malaga Geo')
-    print(game)
-    try:
-        cache = Cache.objects.filter(game=game).get(order=7)
-        print(cache)
-    except ObjectDoesNotExist:
-        print('siiiiiiiii')
+    games = Game.objects.all()
     
-    return redirect('/')
+    context = {
+        'games': games,
+    }
+    return render(request, "game/game_list.html", context)
 
 
 @login_required
 def my_games_view(request):
-    return redirect('/')
+    games = Game.objects.filter(creator=request.user)
+    
+    context = {
+        'games': games,
+    }
+    return render(request, "game/my_games.html", context)
+
+@login_required
+def play_game_view(request, game_id):
+    games = Game.objects.filter(creator=request.user)
+    
+    context = {
+        'games': games,
+    }
+    return render(request, "game/play_game.html", context)
+
+@login_required
+def edit_game_view(request, game_id):
+    games = Game.objects.filter(creator=request.user)
+    
+    context = {
+        'games': games,
+    }
+    return render(request, "game/create_game.html", context)

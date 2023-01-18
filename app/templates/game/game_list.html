@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Active Games{% endblock %}
+{% block content %}
+<section class="section d-flex flex-column align-items-center justify-content-center geocaching-section">
+    <div class="container custom-container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-8 d-flex flex-column align-items-center justify-content-center">
+                <h3 class="title-section">Game List</h3>
+                <div class="table-responsive w-100">
+                    <table class="align-middle mb-0 table table-striped">
+                       <thead>
+                          <tr>
+                             <th class="text-center">#</th>
+                             <th>Name</th>
+                             <th class="text-center">Coordinates</th>
+                             <th class="text-center">Radius</th>
+                             <th class="text-center">Creator</th>
+                             <th class="text-center">Status</th>
+                             <th class="text-center">Action</th>
+                          </tr>
+                       </thead>
+                       <tbody>
+                        {% for game in games %}
+                          <tr>
+                             <td class="text-center">
+                                {% if game.picture %}
+                                <img width="30" height="30" class="rounded-circle" src="{{game.picture.url}}" alt="">
+                                {% else %}
+                                {{game.id}}
+                                {% endif %}
+                            </td>
+                             <td>
+                                {{game.name}}
+                             </td>
+                             <td class="text-center">{{game.latitude}}<br>{{game.longitude}}</td>
+                             <td class="text-center">{{game.radius}}</td>
+                             <td class="text-center">{{game.creator}}</td>
+                             <td class="text-center">
+                                {% if game.active %}
+                                <span class="badge bg-success">Active</span>
+                                {% else %}
+                                <span class="badge bg-danger" data-bs-toggle="tooltip" data-bs-html="true" title="<b>Winner</b>: {{game.winner}}">Finished</span>
+                                {% endif %}
+                             </td>
+                             <td class="text-center">
+                                {% if game.active %}
+                                <a class="btn btn-primary btn-sm fw-bold" href="/games/{{game.id}}"><i class="bi bi-compass"></i> Play</a>
+                                {% endif %}
+                             </td>
+                          </tr>
+                          {% endfor %}
+                       </tbody>
+                    </table>
+                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
