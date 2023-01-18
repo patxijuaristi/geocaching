@@ -19,6 +19,7 @@
                              <th>Name</th>
                              <th class="text-center">Coordinates</th>
                              <th class="text-center">Radius</th>
+                             <th class="text-center">Caches</th>
                              <th class="text-center">Status</th>
                              <th class="text-center">Action</th>
                           </tr>
@@ -38,6 +39,7 @@
                              </td>
                              <td class="text-center">{{game.latitude}}<br>{{game.longitude}}</td>
                              <td class="text-center">{{game.radius}}</td>
+                             <td class="text-center">{{game.game_cache.all|length}}</td>
                              <td class="text-center">
                                 {% if game.active %}
                                 <span class="badge bg-success">Active</span>
@@ -45,12 +47,13 @@
                                 <span class="badge bg-danger" data-bs-toggle="tooltip" data-bs-html="true" title="<b>Winner</b>: {{game.winner}}">Finished</span>
                                 {% endif %}
                              </td>
-                             <td class="text-center">
-                                <a class="btn btn-primary btn-sm fw-bold" href="/my-games/edit/{{game.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit game"><i class="bi bi-pencil-square"></i></a>
-                                {% if not game.active %}
-                                <a class="btn btn-warning btn-sm fw-bold" href="/my-games/reset/{{game.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Reset game"><i class="bi bi-arrow-repeat"></i></a>
-                                {% endif %}
-                                <a class="btn btn-danger btn-sm fw-bold" href="/my-games/delete/{{game.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove game"><i class="bi bi-trash3"></i></a>
+                             <td class="text-end">
+                                 <a class="btn btn-success btn-sm fw-bold" href="/my-games/{{game.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="View game"><i class="bi bi-eye"></i></a>
+                                 <a class="btn btn-primary btn-sm fw-bold" href="/my-games/edit/{{game.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit game"><i class="bi bi-pencil-square"></i></a>
+                                 {% if not game.active %}
+                                 <a class="btn btn-warning btn-sm fw-bold" href="/my-games/reset/{{game.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Reset game"><i class="bi bi-arrow-repeat"></i></a>
+                                 {% endif %}
+                                 <a class="btn btn-danger btn-sm fw-bold" href="/my-games/delete/{{game.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove game"><i class="bi bi-trash3"></i></a>
                              </td>
                           </tr>
                           {% endfor %}

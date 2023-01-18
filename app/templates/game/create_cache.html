@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}{% if update %}Update {% else %}Create {% endif %} Game{% endblock %}
+{% block title %}{% if update %}Update {% else %}Create {% endif %} Cache{% endblock %}
 {% block content %}
 <section class="section d-flex flex-column align-items-center justify-content-center geocaching-section">
     <div class="container custom-container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-8 d-flex flex-column align-items-center justify-content-center">
-                <h3 class="title-section">{% if update %}Update {% else %}Create {% endif %} Game</h3>
+                <h3 class="title-section">{% if update %}Update {% else %}Create {% endif %} Cache</h3>
                 <form method="post" class="custom-creation-form" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{form}}
-                    <div class="col-12 mt-5 d-flex justify-content-between">
-                    <a href="/my-games" class="btn btn-danger">Back</a>
-                    <input type="submit" class="btn btn-primary" value="{% if update %}Update {% else %}Create {% endif %}Game">
+                <div class="col-12 mt-5 d-flex justify-content-between">
+                    <a href="/my-games/{{game_id}}" class="btn btn-danger">Back</a>
+                    <input type="submit" class="btn btn-primary" value="{% if update %}Update {% else %}Create {% endif %}Cache">
                 </div>
             </form>
             </div>

@@ -39,11 +39,11 @@ class Cache(models.Model):
         if self.hint == None and self.hint_picture == None:
             raise ValidationError('You need to specify a hint or a picture.')
         
-        try:
+        '''try:
             Cache.objects.filter(game=self.game).get(order=self.order)
             raise ValidationError('You need to change the order of the cache with this order. Or change the order of this cache')
         except ObjectDoesNotExist:
-            pass
+            pass'''
     
     def save(self, *args, **kwargs):
         self.full_clean()

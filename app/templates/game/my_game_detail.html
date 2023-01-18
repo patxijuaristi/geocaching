@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{game.name}}{% endblock %}
+{% block content %}
+<section class="section d-flex flex-column align-items-center justify-content-center geocaching-section">
+    <div class="container custom-container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-8 d-flex flex-column align-items-center justify-content-center">
+                <h3 class="title-section">{{game.name}}</h3>
+                {% include "messages.html" %}
+                <div class="col-12">
+                    <a href="/my-games" class="btn btn-danger me-2"><i class="bi bi-arrow-left"></i> Back</a>
+                    <a href = "/my-games/{{game.id}}/new-cache" class="btn btn-success"><i class="bi bi-plus-circle"></i> New Cache</a>
+                </div>
+                <div class="row">
+                    <h4>Este es el juego</h4>
+                    {{game.name}}<br>
+                    {{game.latitude}}<br>
+                    {{game.longitude}}<br>
+                    {{game.radius}}<br>
+                </div>
+                <div class="row mt-2">
+                    <h4>Estos son la lista de caches que contiene el juego</h4>
+                    {% for cache in caches %}
+                    {{cache}}<br>
+                    {% endfor %}
+                </div>
+                <div class="row mt-2">
+                    <h4>Estos son la lista de partidas que contiene el juego</h4>
+                    {% for partida in partidas %}
+                    {{partida}}<br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

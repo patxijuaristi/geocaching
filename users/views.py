@@ -17,7 +17,7 @@ def login_view(request):
         user.save() # guarda el usurio
         if next:
             return redirect(next) # si hay página siguiente la redirige ahí
-        return redirect('/messages') # sino la redirige a la página de mensajes
+        return redirect('/games') # sino la redirige a la página de mensajes
     else:
         if form.errors:
             messages.error(request, 'Wrong Credentials') # Si ocurre algun error durante el login lo incluye en messages para mostarlo en la vista
@@ -40,7 +40,7 @@ def signup_view(request):
         login(request, user) # Realiza el login
         if next:
             return redirect(next) # si hay página siguiente la redirige ahí
-        return redirect('/messages') # sino la redirige a la página de mensajes
+        return redirect('/games') # sino la redirige a la página de mensajes
     else:
         for err in form.errors.values():
             messages.error(request, err) # Si ocurre algun error durante el registro lo incluye en messages para mostarlo en la vista

@@ -13,8 +13,6 @@ def user_game_data(view_func):
     """
     @functools.wraps(view_func)
     def wrapper(request, game_id, *args, **kwargs):
-        print(request.user)
-        print(game_id)
         game = get_object_or_404(Game, id=game_id)
         if game.creator != request.user:
             return HttpResponseForbidden()

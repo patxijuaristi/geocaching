@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from app.decorators import user_game_data
-from .forms import GameCreationForm
+from .forms import GameCreationForm, CacheCreationForm
 
 from .models import Cache, Game, GameResult
 
@@ -27,12 +27,26 @@ def my_games_view(request):
 
 @login_required
 def play_game_view(request, game_id):
-    games = Game.objects.filter(creator=request.user)
+    game = get_object_or_404(Game, id=game_id)
     
     context = {
-        'games': games,
+        'game': game,
     }
     return render(request, "game/play_game.html", context)
+
+@login_required
+@user_game_data
+def my_game_detail_view(request, game_id):
+    game = get_object_or_404(Game, id=game_id)
+    caches = game.game_cache.all()
+    partidas = game.game_result.all()
+    
+    context = {
+        'game': game,
+        'caches': caches,
+        'partidas': partidas
+    }
+    return render(request, "game/my_game_detail.html", context)
 
 @login_required
 def create_game_view(request):
@@ -60,7 +74,8 @@ def edit_game_view(request, game_id):
         form = GameCreationForm(request.POST or None, instance=game)
         context = {
             'form': form,
-            'update': True
+            'update': True,
+            'game_id': game_id
         }
         return render(request, "game/create_game.html", context)
     else:
@@ -68,6 +83,44 @@ def edit_game_view(request, game_id):
         if form.is_valid():
             form.save()
         return redirect('/my-games')
+
+@login_required
+def create_cache_view(request, game_id):
+    if request.method =='GET':
+        form = CacheCreationForm(request.POST or None)
+        context = {
+            'form': form,
+            'game_id': game_id
+        }
+        return render(request, "game/create_cache.html", context)
+    else:
+        form = CacheCreationForm(request.POST, request.FILES or None)
+        if form.is_valid():
+            cache = form.save(commit=False)
+            game = get_object_or_404(Game, id=game_id)
+            cache.game = game
+            cache.save()
+            messages.success(request, 'Game created correctly')
+        return redirect('/my-games')
+
+@login_required
+@user_game_data
+def edit_cache_view(request, game_id, cache_id):
+    cache = get_object_or_404(Cache, id=cache_id)
+    
+    if request.method =='GET':        
+        form = CacheCreationForm(request.POST or None, instance=cache)
+        context = {
+            'form': form,
+            'update': True,
+            'game_id': game_id
+        }
+        return render(request, "game/create_cache.html", context)
+    else:
+        form = CacheCreationForm(request.POST, request.FILES or None, instance=cache)
+        if form.is_valid():
+            form.save()
+        return redirect('/my-games/' + str(game_id))
 
 @login_required
 @user_game_data
