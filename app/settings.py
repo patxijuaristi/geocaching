@@ -89,3 +89,7 @@ AUTH_USER_MODEL = 'users.User'
 STATIC_ROOT = '/static'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app/static')]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'app/media')
+
+MEDIA_URL = '/media/'

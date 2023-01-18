@@ -26,10 +26,9 @@
     
           <nav id="navbar" class="navbar">
             <ul>
-              <li><a class="nav-link scrollto active" href="/">Home</a></li>
               {% if request.user.is_authenticated %}
               <li><a class="nav-link scrollto" href="/games">Games</a></li>
-              <li><a class="nav-link scrollto" href="/my-games">Games</a></li>
+              <li><a class="nav-link scrollto" href="/my-games">My Games</a></li>
               <li><a class="nav-link scrollto" href="/logout">Logout</a></li>
               {% else %}
               <li><a class="getstarted scrollto" href="/login">Get Started</a></li>
