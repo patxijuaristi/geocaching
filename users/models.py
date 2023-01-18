@@ -6,12 +6,12 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 class MyUserManager(BaseUserManager):
 
     # Función para crear usuarios normales.
-    def create_user(self, username, first_name, last_name, password=None):
-        if not username:
-            raise ValueError('Users must have a valid username')
+    def create_user(self, email, first_name, last_name, password=None):
+        if not email:
+            raise ValueError('Users must have a valid email')
 
         user = self.model(
-            username=username,
+            email=email,
             first_name=first_name,
             last_name=last_name,
         )
@@ -21,9 +21,9 @@ class MyUserManager(BaseUserManager):
         return user
 
     #Función para crear usuarios superuser (administradores de Django, se crean por consola)
-    def create_superuser(self, username, first_name, last_name, password=None):
+    def create_superuser(self, email, first_name, last_name, password=None):
         user = self.create_user(
-            username=username,
+            email=email,
             password=password,
             first_name=first_name,
             last_name=last_name,
@@ -37,10 +37,9 @@ class MyUserManager(BaseUserManager):
 # Clase de modelo de usuario
 # Se definen los atributos necesarios más los predefinidos necesarios de Django
 class User(AbstractBaseUser):
-    username = models.CharField(max_length=30, unique=True)
+    email = models.CharField(verbose_name="email", max_length=60, unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    email = models.CharField(max_length=30)
 
     #Atributos por defecto de ususrios Django
     is_superuser = models.BooleanField(default=False)
@@ -48,7 +47,7 @@ class User(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name']
 
     objects = MyUserManager()
