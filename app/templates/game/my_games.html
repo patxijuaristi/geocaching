@@ -1,17 +1,62 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Active Games{% endblock %}
+{% block title %}My Games{% endblock %}
 {% block content %}
 <section class="section d-flex flex-column align-items-center justify-content-center geocaching-section">
     <div class="container custom-container">
         <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
-                <h3 class="title-section">Game List</h3>
-                <ul class="list-group">
-                    {% for game in games %}
-                    <li class="list-group-item">{{game}}</li>
-                    {% endfor %}
-                  </ul>
+            <div class="col-lg-8 col-md-8 d-flex flex-column align-items-center justify-content-center">
+                <h3 class="title-section">My Games</h3>
+                {% include "messages.html" %}
+                <div class="col-12">
+                  <a class="btn btn-success"><i class="bi bi-plus-circle"></i> New</a>
+                </div>
+                <div class="table-responsive w-100">
+                    <table class="align-middle mb-0 table table-striped">
+                       <thead>
+                          <tr>
+                             <th class="text-center">#</th>
+                             <th>Name</th>
+                             <th class="text-center">Coordinates</th>
+                             <th class="text-center">Radius</th>
+                             <th class="text-center">Status</th>
+                             <th class="text-center">Action</th>
+                          </tr>
+                       </thead>
+                       <tbody>
+                        {% for game in games %}
+                          <tr>
+                             <td class="text-center">
+                                {% if game.picture %}
+                                <img width="30" height="30" class="rounded-circle" src="{{game.picture.url}}" alt="">
+                                {% else %}
+                                {{game.id}}
+                                {% endif %}
+                            </td>
+                             <td>
+                                {{game.name}}
+                             </td>
+                             <td class="text-center">{{game.latitude}}<br>{{game.longitude}}</td>
+                             <td class="text-center">{{game.radius}}</td>
+                             <td class="text-center">
+                                {% if game.active %}
+                                <span class="badge bg-success">Active</span>
+                                {% else %}
+                                <span class="badge bg-danger" data-bs-toggle="tooltip" data-bs-html="true" title="<b>Winner</b>: {{game.winner}}">Finished</span>
+                                {% endif %}
+                             </td>
+                             <td class="text-center">
+                                <a class="btn btn-primary btn-sm fw-bold" href="/my-games/{{game.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit game"><i class="bi bi-pencil-square"></i></a>
+                                {% if not game.active %}
+                                <a class="btn btn-warning btn-sm fw-bold" href="/my-games/reset/{{game.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Reset game"><i class="bi bi-arrow-repeat"></i></a>
+                                {% endif %}
+                                <a class="btn btn-danger btn-sm fw-bold" href="/my-games/delete/{{game.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove game"><i class="bi bi-trash3"></i></a>
+                             </td>
+                          </tr>
+                          {% endfor %}
+                       </tbody>
+                    </table>
+                 </div>
             </div>
         </div>
     </div>
