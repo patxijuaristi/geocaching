@@ -48,17 +48,26 @@ def create_game_view(request):
             game = form.save(commit=False)
             game.creator = request.user
             game.save()
+            messages.success(request, 'Game created correctly')
         return redirect('/my-games')
 
 @login_required
 @user_game_data
 def edit_game_view(request, game_id):
-    games = Game.objects.filter(creator=request.user)
+    game = get_object_or_404(Game, id=game_id)
     
-    context = {
-        'games': games,
-    }
-    return render(request, "game/create_game.html", context)
+    if request.method =='GET':        
+        form = GameCreationForm(request.POST or None, instance=game)
+        context = {
+            'form': form,
+            'update': True
+        }
+        return render(request, "game/create_game.html", context)
+    else:
+        form = GameCreationForm(request.POST, request.FILES or None, instance=game)
+        if form.is_valid():
+            form.save()
+        return redirect('/my-games')
 
 @login_required
 @user_game_data

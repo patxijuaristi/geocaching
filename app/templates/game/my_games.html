@@ -46,7 +46,7 @@
                                 {% endif %}
                              </td>
                              <td class="text-center">
-                                <a class="btn btn-primary btn-sm fw-bold" href="/my-games/{{game.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit game"><i class="bi bi-pencil-square"></i></a>
+                                <a class="btn btn-primary btn-sm fw-bold" href="/my-games/edit/{{game.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit game"><i class="bi bi-pencil-square"></i></a>
                                 {% if not game.active %}
                                 <a class="btn btn-warning btn-sm fw-bold" href="/my-games/reset/{{game.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Reset game"><i class="bi bi-arrow-repeat"></i></a>
                                 {% endif %}
