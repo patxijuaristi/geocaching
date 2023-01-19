@@ -5,6 +5,7 @@ from app.decorators import user_game_data
 from .forms import FoundCacheCreationForm, GameCreationForm, CacheCreationForm
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from .models import Cache, Game, GameResult
+import folium
 
 @login_required
 def games_view(request):
@@ -37,8 +38,19 @@ def play_game_view(request, game_id):
         pass
 
     found_form = FoundCacheCreationForm(request.POST or None)
-    
+
+    start_coords = (game.latitude, game.longitude)
+    folium_map = folium.Map(location=start_coords,
+                            zoom_start=game.radius,
+                            attr="https://www.openstreetmap.org/#map=6/40.007/-2.488",
+                            max_zoom=18,
+                            min_zoom=15,
+                            )
+
+    mymap = folium_map._repr_html_()  # HTML representation of the map
+
     context = {
+        'map': mymap,
         'game': game,
         'caches': caches,
         'found_form': found_form,
@@ -73,8 +85,19 @@ def my_game_detail_view(request, game_id):
     game = get_object_or_404(Game, id=game_id)
     caches = game.game_cache.all()
     partidas = game.game_result.all()
+
+    start_coords = (game.latitude, game.longitude)
+    folium_map = folium.Map(location=start_coords,
+                            zoom_start=game.radius,
+                            attr="https://www.openstreetmap.org/#map=6/40.007/-2.488",
+                            max_zoom=18,
+                            min_zoom=15,
+                            )
+
+    mymap = folium_map._repr_html_()  # HTML representation of the map
     
     context = {
+        'map': mymap,
         'game': game,
         'caches': caches,
         'partidas': partidas

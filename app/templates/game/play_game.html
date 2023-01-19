@@ -12,27 +12,20 @@
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-plus-circle"></i> Found Cache</button>
                 </div>
                 <div class="row">
-                    <h4>Este es el juego</h4>
-                    {{game.name}}<br>
-                    {{game.latitude}}<br>
-                    {{game.longitude}}<br>
-                    {{game.radius}}<br>
+                    <h4>Este es el juego: </h4>
                 </div>
-                <div class="row mt-2">
-                    <h4>Estos son la lista de caches que contiene el juego</h4>
-                    {% for cache in caches %}
-                    {{cache.hint}}<br>
-                    {{cache.latitude}}<br>
-                    {{cache.longitude}}<br>
-                    {% if cache.hint_picture %}
-                    <div class="col-12">
-                      <img width="60" height="60" src="{{cache.hint_picture.url}}" alt="">
+                <div class="container">
+                    <div>
+                        <!-- <p>This the map canvas... </p> -->
+                        {{map | safe}}
                     </div>
-                    {% endif %}
-                    <br>
-                    {% endfor %}
+
+                    <!-- footer -->
+                    <div class="col-12" style="background-color: bisque;">
+                         ...
+                    </div>
                 </div>
-            </div>
+
         </div>
     </div>
 </section>

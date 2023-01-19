@@ -14,10 +14,16 @@
                 </div>
                 <div class="row">
                     <h4>Este es el juego</h4>
-                    {{game.name}}<br>
-                    {{game.latitude}}<br>
-                    {{game.longitude}}<br>
-                    {{game.radius}}<br>
+                <div class="container">
+                    <div>
+                        <!-- <p>This the map canvas... </p> -->
+                        {{map | safe}}
+                    </div>
+
+                    <!-- footer -->
+                    <div class="col-12" style="background-color: bisque;">
+                         ...
+                    </div>
                 </div>
                 <div class="row mt-2">
                     <h4>Estos son la lista de caches que contiene el juego</h4>
