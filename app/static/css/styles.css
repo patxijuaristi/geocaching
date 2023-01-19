@@ -1510,3 +1510,7 @@ section {
   width: 100%;
   margin-bottom: 3%;
 }
+
+.marker-img{
+  max-width: 100px;
+}

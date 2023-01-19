@@ -12,30 +12,31 @@
                     <a href="/my-games" class="btn btn-danger me-2"><i class="bi bi-arrow-left"></i> Back</a>
                     <a href = "/my-games/{{game.id}}/new-cache" class="btn btn-success"><i class="bi bi-plus-circle"></i> New Cache</a>
                 </div>
-                <div class="row">
-                    <h4>Este es el juego</h4>
-                <div class="container">
-                    <div>
-                        <!-- <p>This the map canvas... </p> -->
-                        {{map | safe}}
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            {{map | safe}}
+                        </div>
+                        <div class="col-lg-4">
+                            <h5 class="text-center fw-bold">Results</h5>
+                            <div class="table-responsive w-100">
+                                <table class="align-middle mb-0 table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Player</th>
+                                            <th class="text-center">Caches</th>
+                                        </tr>
+                                   </thead>
+                                   <tbody>
+                                        {% for p in partidas %}
+                                        <td class="text-center">{{p.player}}</td>
+                                        <td class="text-center">{{p.found_caches}}</td>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- footer -->
-                    <div class="col-12" style="background-color: bisque;">
-                         ...
-                    </div>
-                </div>
-                <div class="row mt-2">
-                    <h4>Estos son la lista de caches que contiene el juego</h4>
-                    {% for cache in caches %}
-                    {{cache}}<br>
-                    {% endfor %}
-                </div>
-                <div class="row mt-2">
-                    <h4>Estos son la lista de partidas que contiene el juego</h4>
-                    {% for partida in partidas %}
-                    {{partida}}<br>
-                    {% endfor %}
                 </div>
             </div>
         </div>

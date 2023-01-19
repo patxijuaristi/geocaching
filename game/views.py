@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from app.decorators import user_game_data
-from .forms import FoundCacheCreationForm, GameCreationForm, CacheCreationForm
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from .utils import create_map
+from .forms import FoundCacheCreationForm, GameCreationForm, CacheCreationForm
 from .models import Cache, Game, GameResult
-import folium
 
 @login_required
 def games_view(request):
@@ -29,7 +29,6 @@ def my_games_view(request):
 @login_required
 def play_game_view(request, game_id):
     game = get_object_or_404(Game, id=game_id)
-    caches = game.game_cache.all()
 
     try:
         GameResult.objects.filter(game=game).get(player=request.user)
@@ -39,21 +38,11 @@ def play_game_view(request, game_id):
 
     found_form = FoundCacheCreationForm(request.POST or None)
 
-    start_coords = (game.latitude, game.longitude)
-    folium_map = folium.Map(location=start_coords,
-                            zoom_start=game.radius,
-                            attr="https://www.openstreetmap.org/#map=6/40.007/-2.488",
-                            max_zoom=18,
-                            min_zoom=15,
-                            )
-    folium.Marker(start_coords).add_to(folium_map)
-
-    mymap = folium_map._repr_html_()  # HTML representation of the map
+    folium_map = create_map(game, request.user, True)
 
     context = {
-        'map': mymap,
+        'map': folium_map,
         'game': game,
-        'caches': caches,
         'found_form': found_form,
         'game_id': game_id
     }
@@ -84,23 +73,13 @@ def found_cache(request, game_id):
 @user_game_data
 def my_game_detail_view(request, game_id):
     game = get_object_or_404(Game, id=game_id)
-    caches = game.game_cache.all()
     partidas = game.game_result.all()
 
-    start_coords = (game.latitude, game.longitude)
-    folium_map = folium.Map(location=start_coords,
-                            zoom_start=game.radius,
-                            attr="https://www.openstreetmap.org/#map=6/40.007/-2.488",
-                            max_zoom=18,
-                            min_zoom=15,
-                            )
+    folium_map = create_map(game, request.user, False)
 
-    mymap = folium_map._repr_html_()  # HTML representation of the map
-    
     context = {
-        'map': mymap,
+        'map': folium_map,
         'game': game,
-        'caches': caches,
         'partidas': partidas
     }
     return render(request, "game/my_game_detail.html", context)
