@@ -46,6 +46,7 @@ def play_game_view(request, game_id):
                             max_zoom=18,
                             min_zoom=15,
                             )
+    folium.Marker(start_coords).add_to(folium_map)
 
     mymap = folium_map._repr_html_()  # HTML representation of the map
 
