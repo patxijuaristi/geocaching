@@ -23,7 +23,13 @@
                     {% for cache in caches %}
                     {{cache.hint}}<br>
                     {{cache.latitude}}<br>
-                    {{cache.longitude}}<br><br>
+                    {{cache.longitude}}<br>
+                    {% if cache.hint_picture %}
+                    <div class="col-12">
+                      <img width="60" height="60" src="{{cache.hint_picture.url}}" alt="">
+                    </div>
+                    {% endif %}
+                    <br>
                     {% endfor %}
                 </div>
             </div>

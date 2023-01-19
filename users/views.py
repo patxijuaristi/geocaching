@@ -10,7 +10,7 @@ def login_view(request):
     next = request.GET.get('next') # Se comprueba si hay una página siguiente y si la hay se coge
     form = UserLoginForm(request.POST or None) # Crea la clase de formulario de login
     if form.is_valid(): # Comprueba que el formulario es correcto
-        username = form.cleaned_data.get('username') # recoge el campo de username del formulario
+        username = form.cleaned_data.get('email') # recoge el campo de username del formulario
         password = form.cleaned_data.get('password') # recoge el campo de password del formulario
         user = authenticate(username=username, password=password) # autentica el usuario
         login(request, user) # realiza el login
