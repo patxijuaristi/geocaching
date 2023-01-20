@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{result.player}} in {{game.name}}{% endblock %}
+{% block content %}
+<section class="section d-flex flex-column align-items-center justify-content-center geocaching-section">
+    <div class="container custom-container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-8 d-flex flex-column align-items-center justify-content-center">
+                <h3 class="title-section">{{result.player}} in {{game.name}}</h3>
+                {% include "messages.html" %}
+                <div class="col-12">
+                    <a href="/my-games/{{game.id}}" class="btn btn-danger me-2"><i class="bi bi-arrow-left"></i> Back</a>
+                    {% if result.player == game.winner %}
+                    <a href="/my-games/reset/{{game.id}}" class="btn btn-secondary me-2"><i class="bi bi-backspace"></i> Reject</a>
+                    {% endif %}
+                </div>
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row gx-2">
+                                {% for img in found_cache_imgs %}
+                                <div class="col-md-6 result-img mb-3">
+                                    <img src="{{img.cache_picture.url}}" alt="" class="w-100">
+                                    <div class="top-right">Cache {{ forloop.counter }}</div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -29,8 +29,11 @@
                                    </thead>
                                    <tbody>
                                         {% for p in partidas %}
-                                        <td class="text-center">{{p.player}}</td>
-                                        <td class="text-center">{{p.found_caches}}</td>
+                                        <tr>
+                                            <td class="text-center">{{p.player}}</td>
+                                            <td class="text-center">{{p.found_caches}}</td>
+                                            <td class="text-center"><a class="btn btn-primary btn-sm fw-bold" href="/my-games/{{game.id}}/result/{{p.id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Check result"><i class="bi bi-eye"></i></a></td>
+                                        </tr>
                                         {% endfor %}
                                     </tbody>
                                 </table>

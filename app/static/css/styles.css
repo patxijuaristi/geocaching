@@ -1514,3 +1514,28 @@ section {
 .marker-img{
   max-width: 100px;
 }
+
+.result-img {
+  position: relative;
+  text-align: center;
+  border: 2px solid #000;
+}
+
+.result-img .top-right {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: blue;
+  font-weight: bold;
+  background: white;
+  padding: 5px;
+  border-radius: 0% 0 20% 0;
+  border-right: 3px solid blue;
+  border-bottom: 3px solid blue;
+}
+
+.result-img .center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}

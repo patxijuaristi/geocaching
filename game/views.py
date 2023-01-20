@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from app.decorators import user_game_data
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist
 from .utils import create_map
-from .forms import FoundCacheCreationForm, GameCreationForm, CacheCreationForm
+from .forms import FoundCacheCreationForm, GameCreationForm, CacheCreationForm, GameUpdateForm
 from .models import Cache, Game, GameResult
+
+import geocoder
 
 @login_required
 def games_view(request):
@@ -85,6 +87,20 @@ def my_game_detail_view(request, game_id):
     return render(request, "game/my_game_detail.html", context)
 
 @login_required
+@user_game_data
+def result_view(request, game_id, result_id):
+    game = get_object_or_404(Game, id=game_id)
+    result = game.game_result.get(id=result_id)
+    found_cache_imgs = result.found_cache.all()
+
+    context = {
+        'result': result,
+        'found_cache_imgs': found_cache_imgs,
+        'game': game,
+    }
+    return render(request, "game/result_detail.html", context)
+
+@login_required
 def create_game_view(request):
     if request.method =='GET':
         form = GameCreationForm(request.POST or None)
@@ -96,6 +112,9 @@ def create_game_view(request):
         form = GameCreationForm(request.POST, request.FILES or None)
         if form.is_valid():
             game = form.save(commit=False)
+            location = geocoder.osm(form.cleaned_data.get('address'))
+            game.latitude = location.lat
+            game.longitude = location.lng
             game.creator = request.user
             game.save()
             messages.success(request, 'Game created correctly')
@@ -107,7 +126,7 @@ def edit_game_view(request, game_id):
     game = get_object_or_404(Game, id=game_id)
     
     if request.method =='GET':        
-        form = GameCreationForm(request.POST or None, instance=game)
+        form = GameUpdateForm(request.POST or None, instance=game)
         context = {
             'form': form,
             'update': True,
@@ -115,7 +134,7 @@ def edit_game_view(request, game_id):
         }
         return render(request, "game/create_game.html", context)
     else:
-        form = GameCreationForm(request.POST, request.FILES or None, instance=game)
+        form = GameUpdateForm(request.POST, request.FILES or None, instance=game)
         if form.is_valid():
             form.save()
         return redirect('/my-games')

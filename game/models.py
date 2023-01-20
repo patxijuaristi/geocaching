@@ -9,8 +9,8 @@ class Game(models.Model):
 
     name = models.CharField(max_length=200)
     picture = models.ImageField(null=True, blank=True, upload_to='game/')
-    latitude = models.DecimalField(max_digits=8, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    latitude = models.DecimalField(max_digits=10, decimal_places=8)
+    longitude = models.DecimalField(max_digits=10, decimal_places=8)
     zoom = models.IntegerField(validators=[MaxValueValidator(14), MinValueValidator(1)])
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='game_creator')
     winner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='game_winner', null=True, blank=True)
@@ -26,8 +26,8 @@ class Cache(models.Model):
     
     hint = models.CharField(max_length=200, null=True, blank=True)
     hint_picture = models.ImageField(null=True, blank=True, upload_to='cache/')
-    latitude = models.DecimalField(max_digits=8, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    latitude = models.DecimalField(max_digits=10, decimal_places=8)
+    longitude = models.DecimalField(max_digits=10, decimal_places=8)
     order = models.IntegerField()
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='game_cache')
 
