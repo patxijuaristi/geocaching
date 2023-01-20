@@ -19,6 +19,9 @@
                              <th class="text-center">Creator</th>
                              <th class="text-center">Status</th>
                              <th class="text-center">Action</th>
+                             {% if request.user.is_superuser%}
+                             <th class="text-center">Details</th>
+                             {% endif %}
                           </tr>
                        </thead>
                        <tbody>
@@ -35,7 +38,11 @@
                                 {{game.name}}
                              </td>
                              <td class="text-center">{{game.latitude}}<br>{{game.longitude}}</td>
-                             <td class="text-center">{{game.game_result.all|length}}</td>
+                             {% if game.winner %}
+                              <td class="text-center">Winner: {{game.winner}}</td>
+                             {% else %}
+                              <td class="text-center">{{game.game_result.all|length}}</td>
+                             {% endif %}
                              <td class="text-center">{{game.game_cache.all|length}}</td>
                              <td class="text-center">{{game.creator}}</td>
                              <td class="text-center">
@@ -50,6 +57,11 @@
                                 <a class="btn btn-primary btn-sm fw-bold" href="/games/{{game.id}}"><i class="bi bi-compass"></i> Play</a>
                                 {% endif %}
                              </td>
+                             {% if request.user.is_superuser%}
+                             <td class="text-center">
+                              <a class="btn btn-primary btn-sm fw-bold" href="/my-games/{{game.id}}"><i class="bi bi-gear-fill"></i> Config</a>
+                             </td>
+                             {% endif %}
                           </tr>
                           {% endfor %}
                        </tbody>
