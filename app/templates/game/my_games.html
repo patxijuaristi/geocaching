@@ -18,7 +18,7 @@
                              <th class="text-center">#</th>
                              <th>Name</th>
                              <th class="text-center">Coordinates</th>
-                             <th class="text-center">Radius</th>
+                             <th class="text-center">Zoom</th>
                              <th class="text-center">Caches</th>
                              <th class="text-center">Status</th>
                              <th class="text-center">Action</th>
@@ -38,7 +38,7 @@
                                 {{game.name}}
                              </td>
                              <td class="text-center">{{game.latitude}}<br>{{game.longitude}}</td>
-                             <td class="text-center">{{game.radius}}</td>
+                             <td class="text-center">{{game.zoom}}</td>
                              <td class="text-center">{{game.game_cache.all|length}}</td>
                              <td class="text-center">
                                 {% if game.active %}

@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import Cache, FoundCacheImage, Game, GameResult
 
 class CustomGame(admin.ModelAdmin):
-    list_display = ("name", "latitude", "longitude", "radius", "creator", "active")
+    list_display = ("name", "latitude", "longitude", "zoom", "creator", "active")
 
 class CustomCache(admin.ModelAdmin):
     list_display = ("hint", "hint_picture", "latitude", "longitude", "order", "game")

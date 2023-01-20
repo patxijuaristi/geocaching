@@ -11,7 +11,7 @@ def create_map(game, user, play):
         caches = game.game_cache.all()
 
     start_coords = (game.latitude, game.longitude)
-    folium_map = folium.Map(location=start_coords, zoom_start=game.radius, attr="https://www.openstreetmap.org/#map=6/40.007/-2.488")
+    folium_map = folium.Map(location=start_coords, zoom_start=game.zoom, attr="https://www.openstreetmap.org/#map=6/40.007/-2.488")
 
     for cache in caches:
         popup = ''

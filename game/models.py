@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 
 from users.models import User
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Game(models.Model):
 
@@ -10,7 +11,7 @@ class Game(models.Model):
     picture = models.ImageField(null=True, blank=True, upload_to='game/')
     latitude = models.DecimalField(max_digits=8, decimal_places=6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
-    radius = models.IntegerField()
+    zoom = models.IntegerField(validators=[MaxValueValidator(14), MinValueValidator(1)])
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='game_creator')
     winner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='game_winner', null=True, blank=True)
     active = models.BooleanField(default=True)

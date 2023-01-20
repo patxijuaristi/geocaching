@@ -7,7 +7,7 @@ class GameCreationForm(forms.ModelForm):
     picture = forms.FileField(widget=forms.FileInput(attrs={'accept': 'image/*', 'class': 'form-control'}), required=False)
     latitude = forms.DecimalField(max_digits=8, widget=forms.NumberInput(attrs={'class': 'form-control'}))
     longitude = forms.DecimalField(max_digits=8, widget=forms.NumberInput(attrs={'class': 'form-control'}))
-    radius = forms.IntegerField(initial=10, widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    zoom = forms.IntegerField(initial=10, widget=forms.NumberInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Game
@@ -16,7 +16,7 @@ class GameCreationForm(forms.ModelForm):
             'picture',
             'latitude',
             'longitude',
-            'radius',
+            'zoom',
         ]
 
 class CacheCreationForm(forms.ModelForm):
