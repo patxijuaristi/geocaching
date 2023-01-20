@@ -1,15 +1,9 @@
 from pathlib import Path
 import os
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 APP_NAME = 'Ceocaching'
-
-SECRET_KEY = 'gqy9bd-qokr5=*eo^#agl*n3j(5za*&hohv*f0%ktb#ffey1k#'
-
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -53,13 +47,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'app.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -85,11 +72,3 @@ USE_TZ = True
 
 LOGIN_URL = '/login'
 AUTH_USER_MODEL = 'users.User'
-
-STATIC_ROOT = '/static'
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app/static')]
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'app/media')
-
-MEDIA_URL = '/media/'
