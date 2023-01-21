@@ -37,6 +37,7 @@ DJANGO_DEBUG=changeme(1/0)            //  1 for Debug=True & 0 for Debug=False
 DB_NAME=changeme                      //  Database name
 DB_CLIENT=changeme                    //  Database client url for MongoDB
 SECRET_KEY=changeme                   //  Secret key for the Django project
+CSRF_TRUSTED=changeme                 //  Deployment domain for trusted form
 ```
 
 Anyway, to work locally, we can specify Django to use local settings. For that, we need to change the next line of the files *manage.py* and *wsgi.py*:

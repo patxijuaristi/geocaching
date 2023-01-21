@@ -21,6 +21,8 @@ DATABASES = {
     }
 }
 
+CSRF_TRUSTED_ORIGINS = [env('CSRF_TRUSTED'),]
+
 STATIC_ROOT = '/static'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app/static')]
