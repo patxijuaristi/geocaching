@@ -1539,3 +1539,7 @@ section {
   top: 50%;
   left: 50%;
 }
+
+#google_login:link, #google_login:visited, #google_login:hover, #google_login:active {
+  color:white
+}

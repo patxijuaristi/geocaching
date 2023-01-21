@@ -16,6 +16,13 @@ Once you are inside the virtual environment, install the required packages:
 pip install -r .\requirements.txt
 ```
 
+Add this code fragment to env/Lib/site-packages/djongo/operations.py:
+
+```
+def conditional_expression_supported_in_where_clause(self, expression):
+        return False
+```
+
 Then, we need to specify the credentials for the environmental variables. For that we need to copy the `.env.sample` file and complete the data there:
 
 ```

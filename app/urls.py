@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from game.views import games_view, my_games_view, play_game_view, edit_game_view, delete_game, reset_game, create_game_view, my_game_detail_view, create_cache_view, found_cache, result_view
 
 from home.views import home_view
@@ -27,6 +27,8 @@ urlpatterns = [
     path('my-games/edit/<game_id>', edit_game_view, name='edit-game'),
     path('my-games/delete/<game_id>', delete_game, name='delete-game'),
     path('my-games/reset/<game_id>', reset_game, name='reset-game'),
+
+    path('accounts/', include('allauth.urls'))
 ]
 
 if settings.DEBUG:

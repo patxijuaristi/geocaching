@@ -15,6 +15,14 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'home.apps.HomeConfig',
     'game.apps.GameConfig',
+
+    #oauth
+    'allauth',
+    'django.contrib.sites',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'fontawesomefree'
 ]
 
 MIDDLEWARE = [
@@ -72,3 +80,31 @@ USE_TZ = True
 
 LOGIN_URL = '/login'
 AUTH_USER_MODEL = 'users.User'
+
+# AUTENTICACION OAUTH
+SITE_ID = 2
+
+LOGIN_REDIRECT_URL = '/my-games'
+
+# Additional configuration settings
+SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_LOGOUT_ON_GET= True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+AUTHENTICATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}

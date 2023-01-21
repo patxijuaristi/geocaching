@@ -40,6 +40,7 @@ class User(AbstractBaseUser):
     email = models.CharField(verbose_name="email", max_length=60, unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+    username = models.CharField(max_length=30)
 
     #Atributos por defecto de ususrios Django
     is_superuser = models.BooleanField(default=False)
