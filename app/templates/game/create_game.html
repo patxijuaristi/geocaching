@@ -3,16 +3,13 @@
 {% block title %}{% if update %}Update {% else %}Create {% endif %} Game{% endblock %}
 {% block content %}
 <section class="section d-flex flex-column align-items-center justify-content-center geocaching-section">
-    <div class="container">
+    <div class="container custom-container">
         <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="pt-4 pb-2 mb-4">
-                            <h5 class="card-title text-center pb-0 fs-4">{% if update %}Update {% else %}Create {% endif %} Game</h5>
-                        </div>
-                        {% include "messages.html" %}
-                        <form method="post" class="row g-3" enctype="multipart/form-data">
+            <div class="col-lg-8 col-md-8 d-flex flex-column align-items-center justify-content-center">
+                <h3 class="title-section">{% if update %}Update {% else %}Create {% endif %} Game</h3>
+                {% include "messages.html" %}
+                <div class="col-lg-8 mt-3">
+                    <form method="post" class="row g-3" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="col-12 d-flex">
                                 <div class="col-3 col-md-2">
@@ -84,12 +81,11 @@
                             </div>
                             {% endif %}
                             <div class="col-12 mt-5 d-flex justify-content-between">
-                                <a href="/my-games" class="btn btn-danger">Back</a>
-                                <input type="submit" class="btn btn-primary" value="{% if update %}Update {% else %}Create {% endif %}Game">
+                                <a href="/my-games" class="btn btn-danger"><i class="bi bi-arrow-left"></i> Back</a>
+                                <input type="submit" class="btn btn-primary px-3" value="{% if update %}Update {% else %}Create {% endif %}Game">
                             </div>
                         </form>
-                    </div>
-                </div>  
+                 </div>
             </div>
         </div>
     </div>

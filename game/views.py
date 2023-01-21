@@ -68,7 +68,9 @@ def found_cache(request, game_id):
             game.active = False
             game.winner = request.user
             game.save()
-        messages.success(request, 'Cache finding added correctly')
+            messages.success(request, '🎉 CONGRATULATIONS! You have won the game! 🎉')
+        else:
+            messages.success(request, 'Cache finding added correctly')
     return redirect('/games/' + str(game_id))
 
 @login_required

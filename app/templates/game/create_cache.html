@@ -3,81 +3,77 @@
 {% block title %}{% if update %}Update {% else %}Create {% endif %} Cache{% endblock %}
 {% block content %}
 <section class="section d-flex flex-column align-items-center justify-content-center geocaching-section">
-    <div class="container">
+    <div class="container custom-container">
         <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="pt-4 pb-2 mb-4">
-                            <h5 class="card-title text-center pb-0 fs-4">{% if update %}Update {% else %}Create {% endif %} Cache</h5>
+            <div class="col-lg-8 col-md-8 d-flex flex-column align-items-center justify-content-center">
+                <h3 class="title-section">{% if update %}Update {% else %}Create {% endif %} Cache</h3>
+                {% include "messages.html" %}
+                <div class="col-lg-8 mt-3">
+                    <form method="post" class="row g-3" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="col-12 d-flex">
+                            <div class="col-3 col-md-2">
+                                <label class="form-label">Hint:</label>
+                            </div>
+                            <div class="col-9 col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-text">🧩</span>
+                                    {{ form.hint }}
+                                </div>
+                            </div>
                         </div>
-                        {% include "messages.html" %}
-                        <form method="post" class="row g-3" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="col-12 d-flex">
-                                <div class="col-3 col-md-2">
-                                    <label class="form-label">Hint:</label>
-                                </div>
-                                <div class="col-9 col-md-10">
-                                    <div class="input-group">
-                                        <span class="input-group-text">🧩</span>
-                                        {{ form.hint }}
-                                    </div>
+                        <div class="col-12 d-flex">
+                            <div class="col-3 col-md-2">
+                                <label class="form-label">Hint picture:</label>
+                            </div>
+                            <div class="col-9 col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-text">📷</span>
+                                    {{ form.hint_picture }}
                                 </div>
                             </div>
-                            <div class="col-12 d-flex">
-                                <div class="col-3 col-md-2">
-                                    <label class="form-label">Hint picture:</label>
-                                </div>
-                                <div class="col-9 col-md-10">
-                                    <div class="input-group">
-                                        <span class="input-group-text">📷</span>
-                                        {{ form.hint_picture }}
-                                    </div>
+                        </div>
+                        <div class="col-12 d-flex">
+                            <div class="col-3 col-md-2">
+                                <label class="form-label">Latitude:</label>
+                            </div>
+                            <div class="col-9 col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-text">🌐</span>
+                                    {{ form.latitude }}
                                 </div>
                             </div>
-                            <div class="col-12 d-flex">
-                                <div class="col-3 col-md-2">
-                                    <label class="form-label">Latitude:</label>
-                                </div>
-                                <div class="col-9 col-md-10">
-                                    <div class="input-group">
-                                        <span class="input-group-text">🌐</span>
-                                        {{ form.latitude }}
-                                    </div>
+                        </div>
+                        <div class="col-12 d-flex">
+                            <div class="col-3 col-md-2">
+                                <label class="form-label">Longitude:</label>
+                            </div>
+                            <div class="col-9 col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-text">🌐</span>
+                                    {{ form.longitude }}
                                 </div>
                             </div>
-                            <div class="col-12 d-flex">
-                                <div class="col-3 col-md-2">
-                                    <label class="form-label">Longitude:</label>
-                                </div>
-                                <div class="col-9 col-md-10">
-                                    <div class="input-group">
-                                        <span class="input-group-text">🌐</span>
-                                        {{ form.longitude }}
-                                    </div>
+                        </div>
+                        <div class="col-12 d-flex">
+                            <div class="col-3 col-md-2">
+                                <label class="form-label">Order:</label>
+                            </div>
+                            <div class="col-9 col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-text">📃</span>
+                                    {{ form.order }}
                                 </div>
                             </div>
-                            <div class="col-12 d-flex">
-                                <div class="col-3 col-md-2">
-                                    <label class="form-label">Order:</label>
-                                </div>
-                                <div class="col-9 col-md-10">
-                                    <div class="input-group">
-                                        <span class="input-group-text">📃</span>
-                                        {{ form.order }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 mt-5 d-flex justify-content-between">
-                                <a href="/my-games/{{game_id}}" class="btn btn-danger">Back</a>
-                                <input type="submit" class="btn btn-primary" value="{% if update %}Update {% else %}Create {% endif %}Cache">
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="col-12 mt-5 d-flex justify-content-between">
+                            <a href="/my-games/{{game_id}}" class="btn btn-danger">Back</a>
+                            <input type="submit" class="btn btn-primary" value="{% if update %}Update {% else %}Create {% endif %}Cache">
+                        </div>
+                    </form>
                 </div>
-            </div>
-        </div>
-    </div>
+           </div>
+       </div>
+   </div>
 </section>
 {% endblock %}
