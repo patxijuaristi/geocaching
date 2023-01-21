@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from app.decorators import user_game_data
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from .utils import create_map
 from .forms import FoundCacheCreationForm, GameCreationForm, CacheCreationForm, GameUpdateForm
 from .models import Cache, Game, GameResult
@@ -149,13 +149,21 @@ def create_cache_view(request, game_id):
         }
         return render(request, "game/create_cache.html", context)
     else:
-        form = CacheCreationForm(request.POST, request.FILES or None)
-        if form.is_valid():
-            cache = form.save(commit=False)
-            game = get_object_or_404(Game, id=game_id)
-            cache.game = game
-            cache.save()
-            messages.success(request, 'Game created correctly')
+        try:
+            form = CacheCreationForm(request.POST, request.FILES or None)
+            if form.is_valid():
+                cache = form.save(commit=False)
+                game = get_object_or_404(Game, id=game_id)
+                cache.game = game
+                cache.save()
+                messages.success(request, 'Game created correctly')
+            else:
+                messages.error(request, form.errors)
+        except ValidationError:
+            messages.error(request, 'You need to change the order of the cache with this order. Or change the order of this cache')
+            return redirect('/my-games/'+ str(game_id) +'/new-cache')
+
+
         return redirect('/my-games')
 
 @login_required

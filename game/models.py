@@ -9,8 +9,8 @@ class Game(models.Model):
 
     name = models.CharField(max_length=200)
     picture = models.ImageField(null=True, blank=True, upload_to='game/')
-    latitude = models.DecimalField(max_digits=10, decimal_places=8)
-    longitude = models.DecimalField(max_digits=10, decimal_places=8)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     zoom = models.IntegerField(validators=[MaxValueValidator(14), MinValueValidator(1)])
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='game_creator')
     winner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='game_winner', null=True, blank=True)
@@ -26,8 +26,8 @@ class Cache(models.Model):
     
     hint = models.CharField(max_length=200, null=True, blank=True)
     hint_picture = models.ImageField(null=True, blank=True, upload_to='cache/')
-    latitude = models.DecimalField(max_digits=10, decimal_places=8)
-    longitude = models.DecimalField(max_digits=10, decimal_places=8)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     order = models.IntegerField()
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='game_cache')
 
@@ -40,11 +40,11 @@ class Cache(models.Model):
         if self.hint == None and self.hint_picture == None:
             raise ValidationError('You need to specify a hint or a picture.')
         
-        '''try:
+        try:
             Cache.objects.filter(game=self.game).get(order=self.order)
             raise ValidationError('You need to change the order of the cache with this order. Or change the order of this cache')
         except ObjectDoesNotExist:
-            pass'''
+            pass
     
     def save(self, *args, **kwargs):
         self.full_clean()

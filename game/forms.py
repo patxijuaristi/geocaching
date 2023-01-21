@@ -20,8 +20,8 @@ class GameUpdateForm(forms.ModelForm):
 
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     picture = forms.FileField(widget=forms.FileInput(attrs={'accept': 'image/*', 'class': 'form-control'}), required=False)
-    latitude = forms.DecimalField(max_digits=8, widget=forms.NumberInput(attrs={'class': 'form-control'}))
-    longitude = forms.DecimalField(max_digits=8, widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    latitude = forms.FloatField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    longitude = forms.FloatField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
     zoom = forms.IntegerField(initial=10, widget=forms.NumberInput(attrs={'class': 'form-control'}))
 
     class Meta:
@@ -38,9 +38,9 @@ class CacheCreationForm(forms.ModelForm):
 
     hint = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     hint_picture = forms.FileField(widget=forms.FileInput(attrs={'accept': 'image/*', 'class': 'form-control'}), required=False)
-    latitude = forms.DecimalField(max_digits=8, widget=forms.NumberInput(attrs={'class': 'form-control'}))
-    longitude = forms.DecimalField(max_digits=8, widget=forms.NumberInput(attrs={'class': 'form-control'}))
-    order = forms.IntegerField(initial=10, widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    latitude = forms.FloatField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    longitude = forms.FloatField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    order = forms.IntegerField(initial=1, widget=forms.NumberInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Cache
