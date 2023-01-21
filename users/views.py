@@ -17,7 +17,7 @@ def login_view(request):
         user.save() # guarda el usurio
         if next:
             return redirect(next) # si hay página siguiente la redirige ahí
-        return redirect('/my-games') # sino la redirige a la página de mensajes
+        return redirect('/my-games') # sino la redirige a la página de juegos
     else:
         if form.errors:
             messages.error(request, 'Wrong Credentials') # Si ocurre algun error durante el login lo incluye en messages para mostarlo en la vista
@@ -34,13 +34,14 @@ def signup_view(request):
     form = UserRegisterForm(request.POST or None) # Crea la clase de formulario de registro
     if form.is_valid(): # Comprueba que el formulario es correcto
         user = form.save(commit=False) # Guarda el registro pero sin hacer commit en la BBDD
+        user.username=form.data.get('email')
         password = form.cleaned_data.get('password') # Recoge la contresña
         user.set_password(password) # Se le aplica al usuario
         user.save() # Guarda el usuario en la BBDD
         login(request, user) # Realiza el login
         if next:
             return redirect(next) # si hay página siguiente la redirige ahí
-        return redirect('/my-games') # sino la redirige a la página de mensajes
+        return redirect('/my-games') # sino la redirige a la página de juegos
     else:
         for err in form.errors.values():
             messages.error(request, err) # Si ocurre algun error durante el registro lo incluye en messages para mostarlo en la vista

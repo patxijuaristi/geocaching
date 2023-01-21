@@ -11,6 +11,7 @@ class MyUserManager(BaseUserManager):
             raise ValueError('Users must have a valid email')
 
         user = self.model(
+            username=email,
             email=email,
             first_name=first_name,
             last_name=last_name,
