@@ -16,7 +16,7 @@ class UserLoginForm(forms.Form):
         password = self.cleaned_data.get('password')
 
         if email and password:
-            user = authenticate(email=email, password=password)
+            user = authenticate(username=email, password=password)
 
             if not user:
                 raise forms.ValidationError('Wrong Credentials')
