@@ -3,19 +3,93 @@
 {% block title %}{% if update %}Update {% else %}Create {% endif %} Game{% endblock %}
 {% block content %}
 <section class="section d-flex flex-column align-items-center justify-content-center geocaching-section">
-    <div class="container custom-container">
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-8 d-flex flex-column align-items-center justify-content-center">
-                <h3 class="title-section">{% if update %}Update {% else %}Create {% endif %} Game</h3>
-                {% include "messages.html" %}
-                <form method="post" class="custom-creation-form" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{form}}
-                    <div class="col-12 mt-5 d-flex justify-content-between">
-                    <a href="/my-games" class="btn btn-danger">Back</a>
-                    <input type="submit" class="btn btn-primary" value="{% if update %}Update {% else %}Create {% endif %}Game">
-                </div>
-            </form>
+            <div class="col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="pt-4 pb-2 mb-4">
+                            <h5 class="card-title text-center pb-0 fs-4">{% if update %}Update {% else %}Create {% endif %} Game</h5>
+                        </div>
+                        {% include "messages.html" %}
+                        <form method="post" class="row g-3" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="col-12 d-flex">
+                                <div class="col-3 col-md-2">
+                                    <label class="form-label">Name:</label>
+                                </div>
+                                <div class="col-9 col-md-10">
+                                    <div class="input-group">
+                                        <span class="input-group-text">🔷</span>
+                                        {{ form.name }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex">
+                                <div class="col-3 col-md-2">
+                                    <label class="form-label">Picture:</label>
+                                </div>
+                                <div class="col-9 col-md-10">
+                                    <div class="input-group">
+                                        <span class="input-group-text">📷</span>
+                                        {{ form.picture }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex">
+                                <div class="col-3 col-md-2">
+                                    <label class="form-label">Zoom:</label>
+                                </div>
+                                <div class="col-9 col-md-10">
+                                    <div class="input-group">
+                                        <span class="input-group-text">🔎</span>
+                                        {{ form.zoom }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if update %}
+                            <div class="col-12 d-flex">
+                                <div class="col-3 col-md-2">
+                                    <label class="form-label">Latitude:</label>
+                                </div>
+                                <div class="col-9 col-md-10">
+                                    <div class="input-group">
+                                        <span class="input-group-text">🧭</span>
+                                        {{ form.latitude }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex">
+                                <div class="col-3 col-md-2">
+                                    <label class="form-label">Longitude:</label>
+                                </div>
+                                <div class="col-9 col-md-10">
+                                    <div class="input-group">
+                                        <span class="input-group-text">🧭</span>
+                                        {{ form.longitude }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="col-12 d-flex">
+                                <div class="col-3 col-md-2">
+                                    <label class="form-label">Address:</label>
+                                </div>
+                                <div class="col-9 col-md-10">
+                                    <div class="input-group">
+                                        <span class="input-group-text">🧭</span>
+                                        {{ form.address }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="col-12 mt-5 d-flex justify-content-between">
+                                <a href="/my-games" class="btn btn-danger">Back</a>
+                                <input type="submit" class="btn btn-primary" value="{% if update %}Update {% else %}Create {% endif %}Game">
+                            </div>
+                        </form>
+                    </div>
+                </div>  
             </div>
         </div>
     </div>
